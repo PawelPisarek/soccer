@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import Field from '../Field'
+import Slider from '../Slider'
 import allData from '../data/data'
 
 const playerPositions = allData.player_positions
+
 class Controls extends Component {
   state = {
     data: [],
-    interval: 10,
     counter: 0,
     playing: true,
   }
-  i = 10
+
+  interval = 10
 
   componentDidMount() {
     this.play()
@@ -34,6 +36,12 @@ class Controls extends Component {
     this.play()
   }
 
+  setCounter = value => {
+    this.setState({
+      counter: Number(value),
+    })
+  }
+
   render() {
     return (
       <div>
@@ -42,7 +50,8 @@ class Controls extends Component {
         ) : (
           <button onClick={this.unpause}>run</button>
         )}
-        <Field data={this.state.data}/>
+        <Field data={this.state.data} />
+        <Slider max={playerPositions.length} setCounter={this.setCounter} />
       </div>
     )
   }
