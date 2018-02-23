@@ -1,0 +1,9 @@
+.field {
+  background-image: url(./img/soccer-field.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 900px;
+  height: 603px;
+  position: relative;
+  margin: 20px auto;
+}
