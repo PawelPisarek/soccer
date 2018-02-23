@@ -11,21 +11,17 @@ class Controls extends Component {
   state = {
     data: [],
     counter: 0,
-    playing: true,
+    playing: false,
     time: 0
   }
 
-  interval = 10
-
-  componentDidMount() {
-    this.play()
-  }
+  myInterval = 10
 
   play = () => {
     this.setState({ counter: this.state.counter + 1, playing: true })
     this.setData(playerPositions[this.state.counter])
     this.setTime()
-    this.playing = setTimeout(this.play, this.interval)
+    this.playing = setTimeout(this.play, this.myInterval)
   }
 
   setData = data => this.setState({ data })
@@ -47,7 +43,7 @@ class Controls extends Component {
   }
 
   setTime = () => {
-    this.setState({time: dataInterval * this.interval * this.state.counter})
+    this.setState({time: dataInterval * this.myInterval * this.state.counter})
   }
 
   render() {
