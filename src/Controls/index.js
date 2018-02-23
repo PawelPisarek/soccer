@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import Field from '../Field'
 import Slider from '../Slider'
+import Timer from '../Timer'
 import allData from '../data/data'
 
 const playerPositions = allData.player_positions
+const dataInterval = allData.interval
 
 class Controls extends Component {
   state = {
     data: [],
     counter: 0,
     playing: true,
+    time: 0
   }
 
   interval = 10
@@ -21,6 +24,7 @@ class Controls extends Component {
   play = () => {
     this.setState({ counter: this.state.counter + 1, playing: true })
     this.setData(playerPositions[this.state.counter])
+    this.setTime()
     this.playing = setTimeout(this.play, this.interval)
   }
 
@@ -42,6 +46,10 @@ class Controls extends Component {
     })
   }
 
+  setTime = () => {
+    this.setState({time: dataInterval * this.interval * this.state.counter})
+  }
+
   render() {
     return (
       <div>
@@ -51,7 +59,8 @@ class Controls extends Component {
           <button onClick={this.unpause}>run</button>
         )}
         <Field data={this.state.data} />
-        <Slider max={playerPositions.length} setCounter={this.setCounter} />
+        <Timer time={this.state.time} />
+        <Slider max={playerPositions.length} value={this.state.counter} setCounter={this.setCounter} />
       </div>
     )
   }

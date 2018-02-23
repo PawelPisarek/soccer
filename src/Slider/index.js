@@ -6,12 +6,13 @@ class Slider extends Component {
     this.props.setCounter(e.target.value)
   }
   render() {
-    const { max } = this.props
+    const { max, value } = this.props
 
     return (
       <div>
         <input
           onChange={this.handleChange}
+          value={value}
           className="slider"
           type="range"
           min="0"
